@@ -1,15 +1,19 @@
 from http.server import HTTPServer
 import time
 from . import WebServer
+import socket
 
 
-host = "localhost"
+# Server data
+hostname = socket.gethostname()
+host = socket.gethostbyname(hostname)
+openHost = "0.0.0.0" # Allow all connections
 port = 8081
 webServer = None
 
 try:
     print("Starting Server...")
-    webServer = HTTPServer((host, port), WebServer)
+    webServer = HTTPServer((openHost, port), WebServer)
     print("Server listening on http://{}:{}".format(host, port))
     webServer.serve_forever()
 except KeyboardInterrupt:
