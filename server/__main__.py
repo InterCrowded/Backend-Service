@@ -6,7 +6,7 @@ import socket
 
 # Server data
 hostname = socket.gethostname()
-host = socket.gethostbyname(hostname)
+# host = socket.gethostbyname(hostname)
 openHost = "0.0.0.0" # Allow all connections
 port = 8081
 webServer = None
@@ -14,7 +14,7 @@ webServer = None
 try:
     print("Starting Server...")
     webServer = HTTPServer((openHost, port), WebServer)
-    print("Server listening on http://{}:{}".format(host, port))
+    print("Server listening on http://{}:{}".format(openHost, port))
     webServer.serve_forever()
 except KeyboardInterrupt:
     print("Exiting server...")
