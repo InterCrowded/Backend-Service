@@ -19,7 +19,10 @@ class WebRouter:
                             "route_id": "00001a",
                             "paths": [
                                 {
-                                    "timespan": 300,
+                                    "timespan": {
+                                        "start": "2019-01-02 00:00:00",
+                                        "end": "2019-01-02 01:30:00",
+                                    },
                                     "start_point": {
                                         "lat": 0,
                                         "long": 0
@@ -33,7 +36,10 @@ class WebRouter:
                                     "vehicle_type": "Bus_Lijn_808"
                                 },
                                 {
-                                    "timespan": 540,
+                                    "timespan": {
+                                        "start": "2019-01-01 05:00:00",
+                                        "end": "2019-01-01 12:00:00",
+                                    },
                                     "start_point": {
                                         "lat": 1.2,
                                         "long": 1.2
@@ -52,7 +58,10 @@ class WebRouter:
                             "route_id": "00001b",
                             "paths": [
                                 {
-                                    "timespan": 120,
+                                    "timespan": {
+                                        "start": "2019-01-01 00:00:00",
+                                        "end": "2019-01-01 01:00:00",
+                                    },
                                     "start_point": {
                                         "lat": 5,
                                         "long": 3.74
@@ -66,7 +75,10 @@ class WebRouter:
                                     "vehicle_type": "Bus_GoGo_112"
                                 },
                                 {
-                                    "timespan": 600,
+                                    "timespan": {
+                                        "start": "2019-01-03 00:00:00",
+                                        "end": "2019-01-03 01:00:00",
+                                    },
                                     "start_point": {
                                         "lat": 7,
                                         "long": 8
@@ -93,7 +105,7 @@ class WebRouter:
         else:
             return json.dumps(
                 {
-                    "message": "404"
+                    "code": 200
                 }
             )
         
