@@ -1,41 +1,12 @@
-from http.server import BaseHTTPRequestHandler
-import json
+from .web_server import WebServer
+from .transport_server import TransportServer
+from .mobility_server import MobilityServer
 
-class WebRouter:
-    def get(self, path: str):
-        # I know it's messy, but just add a new if statement per path
-        if path == "/api":
-            return json.dumps(
-                {
-                    'message': 'Api path called'
-                }
-            )
-        elif path == "/route":
-            return json.dumps(
-                {
-                    "message": "Route path called"
-                }
-            )
-        else:
-            return json.dumps(
-                {
-                    "message": "404"
-                }
-            )
-        
-__router__ = WebRouter()
+def getWebServer():
+    return WebServer(host="0.0.0.0", port=8080, server_name="WebServer")
 
-class WebServer(BaseHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == "/favicon.ico":
-            self.send_response(code=200)
-            self.send_header("Content-Type", "image/x-icon")
-            self.end_headers()
-        else:
-            payload = __router__.get(self.path)
-            self.send_response(code=200)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", len(payload))
-            self.end_headers()
-            # Return response
-            self.wfile.write(bytes(payload, encoding="utf-8"))
+def getTransportServer():
+    return TransportServer(host="0.0.0.0", port=8081, server_name="TransportServer")
+
+def getMobilityServer():
+    return MobilityServer(host="0.0.0.0", port=8082, server_name="MobilityServer")

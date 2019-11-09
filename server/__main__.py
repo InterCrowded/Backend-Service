@@ -1,24 +1,41 @@
-from http.server import HTTPServer
+from . import getWebServer, getTransportServer, getMobilityServer
 import time
-from . import WebServer
-import socket
 
-
-# Server data
-hostname = socket.gethostname()
-# host = socket.gethostbyname(hostname)
-openHost = "0.0.0.0" # Allow all connections
-port = 8081
-webServer = None
 
 try:
-    print("Starting Server...")
-    webServer = HTTPServer((openHost, port), WebServer)
-    print("Server listening on http://{}:{}".format(openHost, port))
-    webServer.serve_forever()
+    # Allocate servers
+    web_server = getWebServer()
+    transport_server = getTransportServer()
+    mobility_server = getMobilityServer()
+    # Start
+    web_server.start()
+    transport_server.start()
+    mobility_server.start()
+    while True:
+        command = input()
+        if command == 'r':
+            print("Restarting servers...")
+            # Stop
+            web_server.end()
+            transport_server.end()
+            mobility_server.end()
+            # Reset
+            web_server = getWebServer()
+            transport_server = getTransportServer()
+            mobility_server = getMobilityServer()
+            # Start
+            web_server.start()
+            transport_server.start()
+            mobility_server.start()
+        elif command == 's':
+            print("Exiting servers...")
+            web_server.end()
+            transport_server.end()
+            mobility_server.end()
+            break
 except KeyboardInterrupt:
-    print("Exiting server...")
-finally:
-    if webServer:
-        webServer.server_close()
-        print("Server stopped")
+    print("Exiting servers...")
+    if web_server:
+        web_server.end()
+        transport_server.end()
+        mobility_server.end()
