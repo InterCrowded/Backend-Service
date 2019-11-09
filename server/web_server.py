@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
 import json
 from threading import Thread
+from . import util
 
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
@@ -11,7 +12,13 @@ class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 class WebRouter:
     def get(self, path: str):
         # I know it's messy, but just add a new if statement per path
-        if path == "/api/routes":
+        if path.startswith("/routes/confirm"):
+            return json.dumps(
+                {
+                    "code": 200
+                }
+            )
+        elif path.startswith("/api/routes"):
             return json.dumps(
                 {
                     "routes": [
@@ -96,16 +103,10 @@ class WebRouter:
                     ]
                 }
             )
-        elif path == "/routes/confirm":
-            return json.dumps(
-                {
-                    "message": "Route path called"
-                }
-            )
         else:
             return json.dumps(
                 {
-                    "code": 200
+                    "message": "404"
                 }
             )
         
