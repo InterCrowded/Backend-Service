@@ -30,13 +30,13 @@ class WebRouter:
                                         "start": "2019-01-02 00:00:00",
                                         "end": "2019-01-02 01:30:00",
                                     },
-                                    "start_point": {
-                                        "lat": 0,
-                                        "long": 0
+                                    "startpoint": {
+                                        "lattitude": 0,
+                                        "longitude": 0
                                     },
-                                    "end_point": {
-                                        "lat": 1,
-                                        "long": 1
+                                    "endpoint": {
+                                        "lattitude": 1,
+                                        "longitude": 1
                                     },
                                     "occupancy": 43,
                                     "rating": 4.5,
@@ -47,13 +47,13 @@ class WebRouter:
                                         "start": "2019-01-01 05:00:00",
                                         "end": "2019-01-01 12:00:00",
                                     },
-                                    "start_point": {
-                                        "lat": 1.2,
-                                        "long": 1.2
+                                    "startpoint": {
+                                        "lattitude": 1.2,
+                                        "longitude": 1.2
                                     },
-                                    "end_point": {
-                                        "lat": 2,
-                                        "long": 2
+                                    "endpoint": {
+                                        "lattitude": 2,
+                                        "longitude": 2
                                     },
                                     "occupancy": 0,
                                     "rating": 3.4,
@@ -69,13 +69,13 @@ class WebRouter:
                                         "start": "2019-01-01 00:00:00",
                                         "end": "2019-01-01 01:00:00",
                                     },
-                                    "start_point": {
-                                        "lat": 5,
-                                        "long": 3.74
+                                    "startpoint": {
+                                        "lattitude": 5,
+                                        "longitude": 3.74
                                     },
-                                    "end_point": {
-                                        "lat": 6,
-                                        "long": 8
+                                    "endpoint": {
+                                        "lattitude": 6,
+                                        "longitude": 8
                                     },
                                     "occupancy": 21,
                                     "rating": 2,
@@ -86,13 +86,13 @@ class WebRouter:
                                         "start": "2019-01-03 00:00:00",
                                         "end": "2019-01-03 01:00:00",
                                     },
-                                    "start_point": {
-                                        "lat": 7,
-                                        "long": 8
+                                    "startpoint": {
+                                        "lattitude": 7,
+                                        "longitude": 8
                                     },
-                                    "end_point": {
-                                        "lat": 7.1,
-                                        "long": 8.1
+                                    "endpoint": {
+                                        "lattitudetitude": 7.1,
+                                        "longitude": 8.1
                                     },
                                     "occupancy": 0,
                                     "rating": 3.4,
