@@ -11,14 +11,16 @@ class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 
 class WebRouter:
     def get(self, path: str):
+        request = util.parseRequest(path)
+        print("Request:", request)
         # I know it's messy, but just add a new if statement per path
-        if path.startswith("/routes/confirm"):
+        if request["path"] == "/api/routes/confirm":
             return json.dumps(
                 {
                     "code": 200
                 }
             )
-        elif path.startswith("/api/routes"):
+        elif request["path"] == "/api/routes":
             return json.dumps(
                 {
                     "routes": [
