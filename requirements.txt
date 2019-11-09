@@ -1,0 +1,2 @@
+# For issuing HTTP requests
+requests==2.22.0
