@@ -33,10 +33,12 @@ class WebRouter:
                                         "end": "2019-01-02 01:30:00",
                                     },
                                     "startpoint": {
+                                        "name": "Centralest Central Station",
                                         "lattitude": 0,
                                         "longitude": 0
                                     },
                                     "endpoint": {
+                                        "name": "Willy Wonka's Chocolate Factory",
                                         "lattitude": 1,
                                         "longitude": 1
                                     },
@@ -50,10 +52,12 @@ class WebRouter:
                                         "end": "2019-01-01 12:00:00",
                                     },
                                     "startpoint": {
+                                        "name": "Centre of a Dying Star",
                                         "lattitude": 1.2,
                                         "longitude": 1.2
                                     },
                                     "endpoint": {
+                                        "name": "Crab Nebula",
                                         "lattitude": 2,
                                         "longitude": 2
                                     },
@@ -72,10 +76,12 @@ class WebRouter:
                                         "end": "2019-01-01 01:00:00",
                                     },
                                     "startpoint": {
+                                        "name": "Never gonna give you up",
                                         "lattitude": 5,
                                         "longitude": 3.74
                                     },
                                     "endpoint": {
+                                        "name": "Never gonna let you down",
                                         "lattitude": 6,
                                         "longitude": 8
                                     },
@@ -89,10 +95,12 @@ class WebRouter:
                                         "end": "2019-01-03 01:00:00",
                                     },
                                     "startpoint": {
+                                        "name": "Never gonna turn around and",
                                         "lattitude": 7,
                                         "longitude": 8
                                     },
                                     "endpoint": {
+                                        "name": "Desert you",
                                         "lattitudetitude": 7.1,
                                         "longitude": 8.1
                                     },
