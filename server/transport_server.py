@@ -1,6 +1,11 @@
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from socketserver import ThreadingMixIn
 import json
 from threading import Thread
+
+
+class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
+    pass
 
 
 class TransportRouter:
