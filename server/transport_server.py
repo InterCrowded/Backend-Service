@@ -21,25 +21,25 @@ class TransportRouter:
                             "stops": [
                                 {
                                     "stop_name": "First Straat",
-                                    "timestamp": "2019-01-01 00:01:00"
+                                    "timestamp": "2019-01-01 00:01:00",
                                     "lat": 4.21,
                                     "lat": 44.1
                                 },
                                 {
                                     "stop_name": "Second Straat",
-                                    "timestamp": "2019-01-01 00:02:00"
+                                    "timestamp": "2019-01-01 00:02:00",
                                     "lat": 5.21,
                                     "lat": 55.1
                                 },
                                 {
                                     "stop_name": "Third Straat",
-                                    "timestamp": "2019-01-01 00:03:00"
+                                    "timestamp": "2019-01-01 00:03:00",
                                     "lat": 6.21,
                                     "lat": 66.1
                                 },
                                 {
                                     "stop_name": "Fourth Straat",
-                                    "timestamp": "2019-01-01 00:04:00"
+                                    "timestamp": "2019-01-01 00:04:00",
                                     "lat": 7.21,
                                     "lat": 77.1
                                 }
@@ -50,25 +50,25 @@ class TransportRouter:
                             "stops": [
                                 {
                                     "stop_name": "Fifth Straat",
-                                    "timestamp": "2019-01-01 00:05:00"
+                                    "timestamp": "2019-01-01 00:05:00",
                                     "lat": 7.211,
                                     "lat": 77.11
                                 },
                                 {
                                     "stop_name": "Sixth Straat",
-                                    "timestamp": "2019-01-01 00:06:00"
+                                    "timestamp": "2019-01-01 00:06:00",
                                     "lat": 7.2111,
                                     "lat": 77.111
                                 },
                                 {
                                     "stop_name": "Seventh Straat",
-                                    "timestamp": "2019-01-01 00:03:00"
+                                    "timestamp": "2019-01-01 00:03:00",
                                     "lat": 6.21,
                                     "lat": 66.1
                                 },
                                 {
                                     "stop_name": "Eigth Straat",
-                                    "timestamp": "2019-01-01 00:04:00"
+                                    "timestamp": "2019-01-01 00:04:00",
                                     "lat": 7.21,
                                     "lat": 77.1
                                 }
