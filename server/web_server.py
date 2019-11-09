@@ -101,7 +101,7 @@ class WebRouter:
                                     },
                                     "endpoint": {
                                         "name": "Desert you",
-                                        "lattitudetitude": 7.1,
+                                        "lattitude": 7.1,
                                         "longitude": 8.1
                                     },
                                     "occupancy": 0,
