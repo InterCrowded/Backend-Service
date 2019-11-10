@@ -4,6 +4,8 @@ import json
 from threading import Thread
 from . import util
 import requests
+import re
+import math
 
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
@@ -22,23 +24,56 @@ class WebRouter:
                 }
             )
         elif request["path"] == "/api/routes":
-            # Get data from APIs
-            # bus_schedule = json.loads(requests.get("http://localhost:8081/api/schedules").text)
-            # mobility_points = json.loads(requests.get("http://localhost:8082/api/scooters").text)
+            # pattern = "{(\w+):\'*([0-9\.a-zA-Z\- :]+)\'*,\s*(\w+):\'*([0-9\.a-zA-Z\- :]+)\'*}"
 
             # # Retrieve data
             # user_id = request['params']['user_id'][0]
-            # timestamp = request['params']['timestamp'][0]
-            # _start = json.loads(request['params']['start_point'][0])
-            # _end = json.loads(request['params']['end_point'][0])
-            
-            # start_point = (_start['latitude'], _start['longitude'])
-            # end_point = (_end['latitude'], _end['longitude'])
-            
-            # print("GET data: \nuser_id: {}\ntimestamp: {}\n"
-            #         "start_point: {}\nend_point: {}"
-            #         .format(user_id, timestamp, start_point, end_point))
+            # _start = re.match(pattern, request['params']['start_point'][0])
+            # _end = re.match(pattern, request['params']['end_point'][0])
+            # _time = re.match(pattern, request['params']['timestamp'][0])
 
+            # start_point = (float(_start.group(2)), float(_start.group(4)))
+            # end_point = (float(_end.group(2)), float(_end.group(4)))
+            # times = (_time.group(2), _time.group(4))
+            
+            # # Get data from APIs
+            # bus_schedule = json.loads(requests.get("http://localhost:8081/api/schedules").text)
+            # mobility_points = json.loads(requests.get("http://localhost:8082/api/scooters").text)
+
+            # # Calculate journeys, per provider
+            # routes = []
+
+            # for schedule in bus_schedule['schedules']:
+            #     # Differences per coordinate
+            #     closest_bus_stops = []
+
+            #     # Check closest bus starting point within threshold
+            #     place_index = 0
+            #     for place in schedule['places']:
+            #         stop_index = 0
+            #         for stop in place['stops']:
+            #             lat = stop['latitude']
+            #             long = stop['longitude']
+            #             closest_bus_stops.append({
+            #                 "place": place_index,
+            #                 "stop": stop_index,
+            #                 "distance_to_start": math.sqrt(math.pow(start_point[0] - lat, 2) + math.pow(start_point[1] - long, 2)),
+            #                 "distance_to_end": math.sqrt(math.pow(end_point[0] - lat, 2) + math.pow(end_point[1] - long, 2))
+            #             })
+            #             stop_index += 1
+            #         place_index += 1
+
+            #     # Sort by smallest distance from start point
+            #     closest_bus_stops = sorted(closest_bus_stops, key=lambda tuple: tuple["distance_to_start"] )
+            #     print("Closest Starting Bus Stops for {}: {}".format(schedule['provider'], closest_bus_stops))
+
+            #     # Now take closest bus stop on that route to destination
+            #     closest_bus_stops = sorted(closest_bus_stops, key=lambda tuple: tuple["distance_to_end"] )
+            #     print("Closest Ending Bus Stops for {}: {}".format(schedule['provider'], closest_bus_stops))
+
+
+
+            # Return result
             return json.dumps(
                 {
                     "routes": [
@@ -47,40 +82,59 @@ class WebRouter:
                             "paths": [
                                 {
                                     "timespan": {
-                                        "start": "2019-01-02 00:00:00",
-                                        "end": "2019-01-02 01:30:00",
+                                        "start": "2019-11-10 09:27:00",
+                                        "end": "2019-11-10 09:43:00",
                                     },
                                     "startpoint": {
-                                        "name": "Centralest Central Station",
-                                        "latitude": 0,
-                                        "longitude": 0
+                                        "name": "Berkel-Enschot, Zwaanstraat",
+                                        "latitude": 51.5565,
+                                        "longitude": 5.0901
                                     },
                                     "endpoint": {
-                                        "name": "Willy Wonka's Chocolate Factory",
-                                        "latitude": 1,
-                                        "longitude": 1
+                                        "name": "Tilburg, Centraal Station",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
                                     "occupancy": 43,
-                                    "rating": 4.5,
-                                    "vehicle_type": "Bus_Lijn_808"
+                                    "rating": 3.9,
+                                    "vehicle_type": "Bus_Connexxion_9"
                                 },
                                 {
                                     "timespan": {
-                                        "start": "2019-01-01 05:00:00",
-                                        "end": "2019-01-01 12:00:00",
+                                        "start": "2019-11-10 09:43:00",
+                                        "end": "2019-11-10 09:50:00",
                                     },
                                     "startpoint": {
-                                        "name": "Centre of a Dying Star",
-                                        "latitude": 1.2,
-                                        "longitude": 1.2
+                                        "name": "Tilburg, Centraal Station",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
                                     "endpoint": {
-                                        "name": "Crab Nebula",
-                                        "latitude": 2,
-                                        "longitude": 2
+                                        "name": "Tilburg, Universiteit van Tilburg",
+                                        "latitude": 51.5652,
+                                        "longitude": 5.0516
+                                    },
+                                    "occupancy": 50,
+                                    "rating": 3.4,
+                                    "vehicle_type": "Train_Sprinter_4"
+                                },
+                                {
+                                    "timespan": {
+                                        "start": "2019-11-10 09:50:00",
+                                        "end": "2019-11-10 09:57:00",
+                                    },
+                                    "startpoint": {
+                                        "name": "Tilburg, Universiteit van Tilburg",
+                                        "latitude": 51.5652,
+                                        "longitude": 5.0516
+                                    },
+                                    "endpoint": {
+                                        "name": "Tilburg University",
+                                        "latitude": 51.5701,
+                                        "longitude": 5.0816
                                     },
                                     "occupancy": 0,
-                                    "rating": 3.4,
+                                    "rating": 2.9,
                                     "vehicle_type": "Scooter_Lime_10a4b"
                                 },
                             ]
@@ -90,84 +144,103 @@ class WebRouter:
                             "paths": [
                                 {
                                     "timespan": {
-                                        "start": "2019-01-01 00:00:00",
-                                        "end": "2019-01-01 01:00:00",
+                                        "start": "2019-11-10 09:29:11",
+                                        "end": "2019-11-10 09:45:30",
                                     },
                                     "startpoint": {
-                                        "name": "Never gonna give you up",
-                                        "latitude": 5,
-                                        "longitude": 3.74
+                                        "name": "Berkel-Enschot, Zwaanstraat",
+                                        "latitude": 51.5565,
+                                        "longitude": 5.0901
                                     },
                                     "endpoint": {
-                                        "name": "Never gonna let you down",
-                                        "latitude": 6,
-                                        "longitude": 8
+                                        "name": "Tilburg, Centraal Station",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
-                                    "occupancy": 21,
-                                    "rating": 2,
-                                    "vehicle_type": "Bus_GoGo_112"
+                                    "occupancy": 80,
+                                    "rating": 3.9,
+                                    "vehicle_type": "Bus_Connexxion_44"
                                 },
                                 {
                                     "timespan": {
-                                        "start": "2019-01-03 00:00:00",
-                                        "end": "2019-01-03 01:00:00",
+                                        "start": "2019-11-10 09:45:30",
+                                        "end": "2019-11-10 09:56:00",
                                     },
                                     "startpoint": {
-                                        "name": "Never gonna turn around and",
-                                        "latitude": 7,
-                                        "longitude": 8
+                                        "name": "Tilburg, Centraal Station",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
                                     "endpoint": {
-                                        "name": "Desert you",
-                                        "latitude": 7.1,
-                                        "longitude": 8.1
+                                        "name": "Vijverpad",
+                                        "latitude": 51.5652,
+                                        "longitude": 5.0516
+                                    },
+                                    "occupancy": 20,
+                                    "rating": 3.4,
+                                    "vehicle_type": "Bus_Connexxion_36"
+                                },
+                                {
+                                    "timespan": {
+                                        "start": "2019-11-10 09:50:00",
+                                        "end": "2019-11-10 09:57:00",
+                                    },
+                                    "startpoint": {
+                                        "name": "Vijverpad",
+                                        "latitude": 51.5652,
+                                        "longitude": 5.0516
+                                    },
+                                    "endpoint": {
+                                        "name": "Tilburg University",
+                                        "latitude": 51.5701,
+                                        "longitude": 5.0816
                                     },
                                     "occupancy": 0,
-                                    "rating": 3.4,
-                                    "vehicle_type": "Scooter_Oceania_bca77"
+                                    "rating": 1,
+                                    "vehicle_type": "Scooter_Tier_0x345"
                                 },
                             ]
                         },
                         {
-                            "route_id": "00001c",
+                            "route_id": "00001b",
                             "paths": [
                                 {
                                     "timespan": {
-                                        "start": "2019-01-05 00:00:00",
-                                        "end": "2019-01-05 00:00:02",
+                                        "start": "2019-11-10 09:27:50",
+                                        "end": "2019-11-10 09:52:00",
                                     },
                                     "startpoint": {
-                                        "name": "0000 0001",
-                                        "latitude": 2,
-                                        "longitude": 2
+                                        "name": "Berkel-Enschot, Zwaanstraat",
+                                        "latitude": 51.5565,
+                                        "longitude": 5.0901
                                     },
                                     "endpoint": {
-                                        "name": "0000 0010",
-                                        "latitude": 2.1,
-                                        "longitude": 2.1
+                                        "name": "Spoorlaan",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
-                                    "occupancy": 99,
+                                    "occupancy": 80,
                                     "rating": 3.9,
-                                    "vehicle_type": "Bus_Binark_6969"
+                                    "vehicle_type": "Bus_Connexxion_12"
                                 },
                                 {
                                     "timespan": {
-                                        "start": "2019-01-01 05:00:00",
-                                        "end": "2019-01-01 12:00:00",
+                                        "start": "2019-11-10 09:45:30",
+                                        "end": "2019-11-10 09:56:00",
                                     },
                                     "startpoint": {
-                                        "name": "Three Trees",
-                                        "latitude": 1.3,
-                                        "longitude": 1.3
+                                        "name": "Spoorlaan",
+                                        "latitude": 51.5614,
+                                        "longitude": 5.081
                                     },
                                     "endpoint": {
-                                        "name": "Four Trees",
-                                        "latitude": 1.4,
-                                        "longitude": 1.4
+                                        "name": "Tilburg University",
+                                        "latitude": 51.5652,
+                                        "longitude": 5.0516
                                     },
-                                    "occupancy": 0,
-                                    "rating": 4.0,
-                                    "vehicle_type": "Scooter_Apple_10a4b"
+                                    "occupancy": 20,
+                                    "rating": 3.4,
+                                    "vehicle_type": "Scooter_Tier_0x444"
                                 }
                             ]
                         }
