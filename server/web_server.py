@@ -3,6 +3,7 @@ from socketserver import ThreadingMixIn
 import json
 from threading import Thread
 from . import util
+import requests
 
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
@@ -21,6 +22,23 @@ class WebRouter:
                 }
             )
         elif request["path"] == "/api/routes":
+            # Get data from APIs
+            # bus_schedule = json.loads(requests.get("http://localhost:8081/api/schedules").text)
+            # mobility_points = json.loads(requests.get("http://localhost:8082/api/scooters").text)
+
+            # # Retrieve data
+            # user_id = request['params']['user_id'][0]
+            # timestamp = request['params']['timestamp'][0]
+            # _start = json.loads(request['params']['start_point'][0])
+            # _end = json.loads(request['params']['end_point'][0])
+            
+            # start_point = (_start['latitude'], _start['longitude'])
+            # end_point = (_end['latitude'], _end['longitude'])
+            
+            # print("GET data: \nuser_id: {}\ntimestamp: {}\n"
+            #         "start_point: {}\nend_point: {}"
+            #         .format(user_id, timestamp, start_point, end_point))
+
             return json.dumps(
                 {
                     "routes": [
@@ -34,12 +52,12 @@ class WebRouter:
                                     },
                                     "startpoint": {
                                         "name": "Centralest Central Station",
-                                        "lattitude": 0,
+                                        "latitude": 0,
                                         "longitude": 0
                                     },
                                     "endpoint": {
                                         "name": "Willy Wonka's Chocolate Factory",
-                                        "lattitude": 1,
+                                        "latitude": 1,
                                         "longitude": 1
                                     },
                                     "occupancy": 43,
@@ -53,12 +71,12 @@ class WebRouter:
                                     },
                                     "startpoint": {
                                         "name": "Centre of a Dying Star",
-                                        "lattitude": 1.2,
+                                        "latitude": 1.2,
                                         "longitude": 1.2
                                     },
                                     "endpoint": {
                                         "name": "Crab Nebula",
-                                        "lattitude": 2,
+                                        "latitude": 2,
                                         "longitude": 2
                                     },
                                     "occupancy": 0,
@@ -77,12 +95,12 @@ class WebRouter:
                                     },
                                     "startpoint": {
                                         "name": "Never gonna give you up",
-                                        "lattitude": 5,
+                                        "latitude": 5,
                                         "longitude": 3.74
                                     },
                                     "endpoint": {
                                         "name": "Never gonna let you down",
-                                        "lattitude": 6,
+                                        "latitude": 6,
                                         "longitude": 8
                                     },
                                     "occupancy": 21,
@@ -96,18 +114,61 @@ class WebRouter:
                                     },
                                     "startpoint": {
                                         "name": "Never gonna turn around and",
-                                        "lattitude": 7,
+                                        "latitude": 7,
                                         "longitude": 8
                                     },
                                     "endpoint": {
                                         "name": "Desert you",
-                                        "lattitude": 7.1,
+                                        "latitude": 7.1,
                                         "longitude": 8.1
                                     },
                                     "occupancy": 0,
                                     "rating": 3.4,
                                     "vehicle_type": "Scooter_Oceania_bca77"
                                 },
+                            ]
+                        },
+                        {
+                            "route_id": "00001c",
+                            "paths": [
+                                {
+                                    "timespan": {
+                                        "start": "2019-01-05 00:00:00",
+                                        "end": "2019-01-05 00:00:02",
+                                    },
+                                    "startpoint": {
+                                        "name": "0000 0001",
+                                        "latitude": 2,
+                                        "longitude": 2
+                                    },
+                                    "endpoint": {
+                                        "name": "0000 0010",
+                                        "latitude": 2.1,
+                                        "longitude": 2.1
+                                    },
+                                    "occupancy": 99,
+                                    "rating": 3.9,
+                                    "vehicle_type": "Bus_Binark_6969"
+                                },
+                                {
+                                    "timespan": {
+                                        "start": "2019-01-01 05:00:00",
+                                        "end": "2019-01-01 12:00:00",
+                                    },
+                                    "startpoint": {
+                                        "name": "Three Trees",
+                                        "latitude": 1.3,
+                                        "longitude": 1.3
+                                    },
+                                    "endpoint": {
+                                        "name": "Four Trees",
+                                        "latitude": 1.4,
+                                        "longitude": 1.4
+                                    },
+                                    "occupancy": 0,
+                                    "rating": 4.0,
+                                    "vehicle_type": "Scooter_Apple_10a4b"
+                                }
                             ]
                         }
                     ]

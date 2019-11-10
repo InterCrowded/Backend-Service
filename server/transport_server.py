@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
 import json
 from threading import Thread
+from . import util
 
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
@@ -10,11 +11,16 @@ class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 
 class TransportRouter:
     def get(self, path: str):
+        request = util.parseRequest(path)
         # I know it's messy, but just add a new if statement per path
-        if path == "/api/schedules":
+        if request["path"] == "/api/schedules":
             return json.dumps(
                 {
                     "modality": "Bus",
+                    "occupancy": 43,
+                    "line": 404,
+                    "provider": "Connexxion",
+                    "rating": 3.4,
                     "places": [
                         {
                             "place_name": "Tilburg",
@@ -22,26 +28,26 @@ class TransportRouter:
                                 {
                                     "stop_name": "First Straat",
                                     "timestamp": "2019-01-01 00:01:00",
-                                    "lat": 4.21,
-                                    "lat": 44.1
+                                    "latitude": 4.21,
+                                    "longitude": 44.1
                                 },
                                 {
                                     "stop_name": "Second Straat",
                                     "timestamp": "2019-01-01 00:02:00",
-                                    "lat": 5.21,
-                                    "lat": 55.1
+                                    "latitude": 5.21,
+                                    "longitude": 55.1
                                 },
                                 {
                                     "stop_name": "Third Straat",
                                     "timestamp": "2019-01-01 00:03:00",
-                                    "lat": 6.21,
-                                    "lat": 66.1
+                                    "latitude": 6.21,
+                                    "longitude": 66.1
                                 },
                                 {
                                     "stop_name": "Fourth Straat",
                                     "timestamp": "2019-01-01 00:04:00",
-                                    "lat": 7.21,
-                                    "lat": 77.1
+                                    "latitude": 7.21,
+                                    "longitude": 77.1
                                 }
                             ]
                         },
@@ -51,32 +57,30 @@ class TransportRouter:
                                 {
                                     "stop_name": "Fifth Straat",
                                     "timestamp": "2019-01-01 00:05:00",
-                                    "lat": 7.211,
-                                    "lat": 77.11
+                                    "latitude": 7.211,
+                                    "longitude": 77.11
                                 },
                                 {
                                     "stop_name": "Sixth Straat",
                                     "timestamp": "2019-01-01 00:06:00",
-                                    "lat": 7.2111,
-                                    "lat": 77.111
+                                    "latitude": 7.2111,
+                                    "longitude": 77.111
                                 },
                                 {
                                     "stop_name": "Seventh Straat",
                                     "timestamp": "2019-01-01 00:03:00",
-                                    "lat": 6.21,
-                                    "lat": 66.1
+                                    "latitude": 6.21,
+                                    "longitude": 66.1
                                 },
                                 {
                                     "stop_name": "Eigth Straat",
                                     "timestamp": "2019-01-01 00:04:00",
-                                    "lat": 7.21,
-                                    "lat": 77.1
+                                    "latitude": 7.21,
+                                    "longitude": 77.1
                                 }
                             ]
                         }
                     ],
-                    "line": 404,
-                    "provider": "Connexxion"
                 }
             )
         else:

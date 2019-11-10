@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from socketserver import ThreadingMixIn
 import json
 from threading import Thread
+from . import util
 
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
@@ -10,11 +11,62 @@ class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 
 class MobilityRouter:
     def get(self, path: str):
+        request = util.parseRequest(path)
         # I know it's messy, but just add a new if statement per path
-        if path == "/api/scooters":
+        if request["path"] == "/api/scooters":
             return json.dumps(
                 {
-                    'message': 'Api path called'
+                    "transports": [
+                        {
+                            "modality": "Scooter",
+                            "provider": "Lime",
+                            "rating": 2.5,
+                            "locations": [
+                                {
+                                    "charge": 57,
+                                    "latitude": 5,
+                                    "longitude": 5,
+                                    "id": "10a4b"
+                                },
+                                {
+                                    "charge": 58,
+                                    "latitude": 5.1,
+                                    "longitude": 5.1,
+                                    "id": "10a4c"
+                                },
+                                {
+                                    "charge": 59,
+                                    "latitude": 5.2,
+                                    "longitude": 5.2,
+                                    "id": "10a4d"
+                                },
+                                {
+                                    "charge": 60,
+                                    "latitude": 5.3,
+                                    "longitude": 5.3,
+                                    "id": "10a4e"
+                                },
+                                {
+                                    "charge": 61,
+                                    "latitude": 5.4,
+                                    "longitude": 5.4,
+                                    "id": "10a4f"
+                                },
+                                {
+                                    "charge": 62,
+                                    "latitude": 5.5,
+                                    "longitude": 5.5,
+                                    "id": "10a4g"
+                                },
+                                {
+                                    "charge": 63,
+                                    "latitude": 5.6,
+                                    "longitude": 5.6,
+                                    "id": "10a4h"
+                                }
+                            ]
+                        }
+                    ]
                 }
             )
         elif path == "/routes/confirm":
